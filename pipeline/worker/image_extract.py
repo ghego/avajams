@@ -4,7 +4,10 @@ import subprocess
 import logging
 import re
 import os
+import sys
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 logger = logging.getLogger('avajams.image_extract')
+
 
 NIMAGES = 200
 SCALE = 100
