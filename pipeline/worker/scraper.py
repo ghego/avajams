@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import requests
+from lib.assets.webrequest import WebRequest
 import re
 import json
 
@@ -14,6 +14,7 @@ data_file = 'data/artists.json'
 
 
 artist_names = ['shakira','beyonce']
+
 
 
 def parse_list(list,input):
@@ -54,10 +55,12 @@ def parse_for_genre(inputlist):
 
 def get_all_artist_links(initial_url):
     print 'getting artist links'
-
     '''returns a list of all artist links'''
-
-    req =  requests.get(initial_url)
+    headers = [('Accept', "application/json"),
+               ('Referer', "http://fmusictv.com"),
+               ('Origin', 'http://fmusictv.com'),
+               ('Content-Type', 'application/x-www-form-urlencoded')]
+    req =  WebRequest.get(initial_url, headers=headers, timeout=1)
     soup = BeautifulSoup(req.text,'html.parser')
     content = str(soup.findAll('div')).split(' ')
 
@@ -70,8 +73,14 @@ def get_all_artist_links(initial_url):
 def get_information(artist, url):
     print 'getting information'
     temp_dict = {}
-    req = requests.get(url)
-    soup = BeautifulSoup(req.text,'html.parser')
+    headers = [('Accept', "application/json"),
+               ('Referer', "http://fmusictv.com"),
+               ('Origin', 'http://fmusictv.com'),
+               ('Content-Type', 'application/x-www-form-urlencoded')]
+    response = WebRequest.get(url, headers=headers, timeout=1)
+    print response
+
+    soup = BeautifulSoup(response,'html.parser')
     '''pass in soup link from list '''
     text = soup.findAll('div',{'class':'video-container'})
     text_list = str(text).split(' ')
@@ -95,19 +104,12 @@ def main():
     for artist in artist_names:
         print 'getting %s' % artist
         new_url = url_start + artist
-        try:
-            artist_links = get_all_artist_links(new_url)
-            for links in artist_links:
-                print 'getting links!'
-                print links
-                try:
-                    content = get_information(artist,links)
-                    print '**********Content written successfully**********'
-                except:
-                    print 'failed writeout'
-                    pass
-        except:
-            print 'artist not found on website!'
+        artist_links = get_all_artist_links(new_url)
+        for links in artist_links:
+            print 'getting links!'
+            print links
+            content = get_information(artist,links)
+            print '**********Content written successfully**********'
 
 
 
