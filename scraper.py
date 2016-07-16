@@ -3,6 +3,7 @@ import requests
 import re
 import json
 
+#tester link
 starting_link = 'http://fmusictv.com/2016/03/shakira-try-everything.html'
 
 url_start = 'http://fmusictv.com/tag/'
@@ -12,14 +13,14 @@ link_poss = 'href="http://fmusictv.com/2'
 data_file = 'data/artists.json'
 
 
-artist_names = ['shakira','beyonce']
 
 
-def parse_list(list,input):
+def parse_list(input_list,input):
+    #parse list
     print 'parsing'
     temp_list = []
-    for i in list:
-        if i.startswith(input):
+    for i in input_list:
+        if i.find(input) != -1:
             x = re.findall(r'"([^"]*)"', i)
             temp_list.append(x[0])
     print 'parsed'
@@ -27,23 +28,21 @@ def parse_list(list,input):
 
 
 
-def parse_for_video(list,input):
-    print 'parsing for video'
+def parse_for_video(input_list,input):
+
     temp_list = []
-    for i in list:
-        if i.startswith(input):
+    for i in input_list:
+        if i.find(input) != -1:
             temp_list.append(re.findall(r'"([^"]*)"', i))
-    print 'parsed!'
     return temp_list
 
 
 
 def parse_for_genre(inputlist):
-    print 'parsing for genre'
+
     for i in inputlist:
         if i.startswith('rel="tag"'):# ='rel="tag">Pop</a></li>\n</ul>\n<div'
             t = ((i.split('>'))[1].split('<')[0])
-    print 'parsed!'
     return t
 
 
@@ -62,6 +61,15 @@ def get_all_artist_links(initial_url):
     return artist_links
 
 
+def some_func(artist,url):
+    try:
+        broken = url.split(artist)
+        title = broken[1]
+        return title[1::]
+    except:
+        return url
+
+
 
 def get_information(artist, url):
     print 'getting information'
@@ -71,42 +79,46 @@ def get_information(artist, url):
     '''pass in soup link from list '''
     text = soup.findAll('div',{'class':'video-container'})
     text_list = str(text).split(' ')
-    video = parse_for_video(text_list,'src="https://www.youtube.com/')[0]
+    video = parse_for_video(text_list,'www.youtube.com/')[0]
 
+    # video = parse_for_video(text_list,'src="//www.youtube.com/')[0]
 
+    temp_dict['title'] = some_func(artist,url)
 
-    temp_dict['Link'] = video[0]
+    temp_dict['link'] = video[0]
 
 
     other_text = str(soup.findAll('div')).split(' ')
-    temp_dict['Genre'] = parse_for_genre(other_text)
+    temp_dict['genre'] = parse_for_genre(other_text)
 
-    temp_dict['Artist'] = artist
-    json.dumps(temp_dict,'data/data.json')
-    print 'success!!!'
+    temp_dict['artist'] = artist
+    outfile = open(data_file,'a')
+    json.dump(temp_dict,outfile)
+    outfile.write('\n')
+    # print 'success!!!'
     return temp_dict
 
 
 def main():
+    artist_names = ['rihanna']
     for artist in artist_names:
         print 'getting %s' % artist
         new_url = url_start + artist
         try:
             artist_links = get_all_artist_links(new_url)
             for links in artist_links:
-                print 'getting links!'
                 print links
                 try:
-                    content = get_information(artist,links)
+                    get_information(artist,links)
                     print '**********Content written successfully**********'
                 except:
                     print 'failed writeout'
                     pass
         except:
-            print 'artist not found on website!'
+            print 'artist  not found on website!'
 
 
 
 if __name__ == '__main__':
-    print main()
+    main()
     # print get_information('Shakira',starting_link)
