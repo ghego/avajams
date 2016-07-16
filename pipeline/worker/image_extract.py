@@ -7,14 +7,14 @@ import os
 logger = logging.getLogger('avajams.image_extract')
 
 NIMAGES = 200
-SCALE = 320
+SCALE = 100
 
 def extract_images(video_file_name):
     logger.info("extracting: %s", video_file_name)
     output_path = video_file_name.replace('.mp4', '')
-    for i in xrange(1, NIMAGES):
+    for i in xrange(1, NIMAGES+1):
         command = """ffmpeg -y -accurate_seek -ss `echo {i}*1.0 | \
-                     bc` -i {video} -frames:v 1 -vf scale={scale}:-1 \
+                     bc` -i {video} -frames:v 1 -vf "crop=in_h,scale={scale}:-1" \
                      {folder}/{i}.jpg""".format(i=i,
                                                 scale=SCALE,
                                                 video=video_file_name,
