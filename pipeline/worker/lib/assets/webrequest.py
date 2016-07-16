@@ -21,7 +21,6 @@ class WebRequest:
     request = urllib2.Request(uri)
     if headers:
       headers = dict([('User-Agent', random.choice(self.USER_AGENTS))] + headers)
-    print headers
     # request.add_header('User-Agent', random.choice(self.USER_AGENTS))
     # for header in headers:
       # request.add_header(*header)
