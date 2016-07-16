@@ -8,6 +8,7 @@ FULLY_CONNECTED_VECTOR_SIZE = 2048
 SOFTMAX_VECTOR_SIZE = 1008
 INPUT_FOLDER = sys.argv[1] if len(sys.argv) == 2 else 'images/'
 PROCESSING_BATCH_SIZE = 10
+WRITE_TO_DISK_EVERY_X = 100
 
 
 def list_files(rootfolder):
@@ -17,7 +18,6 @@ def list_files(rootfolder):
     input: location of root folder, str
     output: a list of tuples containing (folder, filename)
     """
-
     folders = next(os.walk(rootfolder))[1]
     out = []
     for folder in folders:
@@ -69,9 +69,15 @@ def vectorize_files(rootfolder,
         fully_connected[i, :] = np.squeeze(fully_connected_layer)
         softmax[i, :] = np.squeeze(softmax_layer)
 
-        if i % 100 == 0:
+        if i % WRITE_TO_DISK_EVERY_X == 0:
+            print "Saving memmap to disk"
             fully_connected.flush()
             softmax.flush()
+
+    print "Final save to disk"
+    fully_connected.flush()
+    softmax.flush()
+    print "Vectorization completed!"
 
 
 if __name__ == "__main__":
