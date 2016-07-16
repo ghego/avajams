@@ -86,10 +86,7 @@ def get_information(artist, url):
     text_list = str(text).split(' ')
     video = parse_for_video(text_list,'src="https://www.youtube.com/')[0]
 
-
-
     temp_dict['Link'] = video[0]
-
 
     other_text = str(soup.findAll('div')).split(' ')
     temp_dict['Genre'] = parse_for_genre(other_text)
