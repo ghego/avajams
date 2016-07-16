@@ -1,5 +1,6 @@
 #Project specific
-data/
+data/test_video.mp4
+data/test_video/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
