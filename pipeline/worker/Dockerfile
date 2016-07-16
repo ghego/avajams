@@ -103,5 +103,5 @@ RUN apt-get autoremove -y; apt-get clean -y
 WORKDIR /app
 ADD . /app
 
-RUN python ./image_extract.py ./data/test_video.mp4
+# RUN python ./image_extract.py ./data/test_video.mp4
 ENTRYPOINT ["python", "hello.py"]
