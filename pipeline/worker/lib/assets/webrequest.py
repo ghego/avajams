@@ -39,7 +39,7 @@ class WebRequest:
     try:
       data = json.loads(response.content)
     except:
-      return response
+      return response.content
     return data
 
   @classmethod
