@@ -9,7 +9,7 @@ import json
 import random
 import datetime
 from lib.assets.decorators import retry
-
+import requests
 
 class WebRequest:
   
@@ -19,18 +19,26 @@ class WebRequest:
   @retry((urllib2.URLError, socket.timeout), tries=1, delay=1, backoff=1)
   def get(self, uri, headers=[], data=None, timeout=10):
     request = urllib2.Request(uri)
-    request.add_header('User-Agent', random.choice(self.USER_AGENTS))
-    for header in headers:
-      request.add_header(*header)
+    if headers:
+      headers = dict([('User-Agent', random.choice(self.USER_AGENTS))] + headers)
+    print headers
+    # request.add_header('User-Agent', random.choice(self.USER_AGENTS))
+    # for header in headers:
+      # request.add_header(*header)
 
     if data and type(data) != str:
       data = json.dumps(data)
 
-    urlfile = urllib2.urlopen(request, timeout=timeout, data=data)
-    response = urlfile.read()
-    urlfile.close()
+    # urlfile = urllib2.urlopen(request, timeout=timeout, data=data)
+    # response = urlfile.read()
+    # urlfile.close()
+    if data:
+      response = requests.post(uri, headers=headers, timeout=timeout, data=data)
+    else:
+      response = requests.get(uri, headers=headers, timeout=timeout, data=data)
+
     try:
-      data = json.loads(response)
+      data = json.loads(response.content)
     except:
       return response
     return data
