@@ -1,14 +1,18 @@
 # Documentation
 
-## Project Goal
-Find the best matching video clip from a video clip or an image.
 
 ## Motivation
+
 * Soundtrack of your life
 * Video is ubiquitous but not easy to add soundrack
 * 60 hours of video are uploaded every minute
 * in 2016 digital video will reach nearly $5 billion
 * Self-Made video mash-up will be big market
+
+## Project Goal for Hackathon
+
+* Find the best matching video clip from a video clip or an image
+* Provide groundwork for future improvements
 
 ## Methodology
 
@@ -46,8 +50,6 @@ https://github.com/tensorflow/models/tree/master/inception
 * How to Classify Images with TensorFlow
 https://research.googleblog.com/2015/12/how-to-classify-images-with-tensorflow.html
 
-* Initial project: Magenta
-https://github.com/tensorflow/magenta
 
 
 
