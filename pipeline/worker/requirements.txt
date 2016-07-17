@@ -16,3 +16,4 @@ six==1.10.0
 traitlets==4.2.2
 wcwidth==0.1.7
 wheel==0.24.0
+boto>=2.41.0

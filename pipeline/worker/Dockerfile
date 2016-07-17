@@ -103,5 +103,7 @@ RUN apt-get autoremove -y; apt-get clean -y
 WORKDIR /app
 ADD . /app
 
+RUN apt-get install bc
+
 # RUN python ./image_extract.py ./data/test_video.mp4
 ENTRYPOINT ["python", "hello.py"]
