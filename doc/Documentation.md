@@ -1,35 +1,33 @@
 # Documentation
 
-## Goal
-Given some video footage, assign some music soundtrack
+## Project Goal
+Find the best matching music for a video clip.
 
-## Data
-http://www.eecs.qmul.ac.uk/mmv/datasets/deap/readme.html#vid_list
-http://fmusictv.com
+## Methodology
 
-https://github.com/tensorflow/magenta
+* Extract an image for every second of the video.  The extracted image is in JPG format with a size of 100 x 100.
+* Use TensorFlow's Inception to associate the images with 1,000 classifications
+* Find the best matching music of these images based on similiary matrix
 
 
-## Basic Requirement
+
+## Future Improvements
 Need to get 10,000 videos to train 
 
-## Steps
-Scrape the data
-Store the data in the central place
-Convert the data to a format
-Separate video from audio
-Encode video and audio separately
 
-## Some Ideas
-From images, come out with a series of words tagging, then associate 
+## Video and Music Data Sources
+http://www.eecs.qmul.ac.uk/mmv/datasets/deap/readme.html#vid_list
+http://fmusictv.com
+http://www.youtube.com
 
-## Image Size = 100 x 100
-avajams/pipeline/worker/data/test_video
 
-## Other References
+## References
 
 Inception
 https://github.com/tensorflow/models/tree/master/inception
 
 How to Classify Images with TensorFlow
 https://research.googleblog.com/2015/12/how-to-classify-images-with-tensorflow.html
+
+https://github.com/tensorflow/magenta
+
