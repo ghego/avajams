@@ -34,8 +34,11 @@ if __name__ == '__main__':
     from sys import argv
 
     if len(argv) < 2:
-        print "Usage: python image_extract.py video_file_name [output_folder_name]"
-    else:
-        extract_images(argv[1])
-    print argv
-    
+        print "Usage: python image_extract.py video_file_name.txt [output_folder_name]"
+        exit(0)
+
+    with open(argv[1]) as fin:
+        lines = fin.readlines()
+
+    for line in lines:
+        extract_images(line)
