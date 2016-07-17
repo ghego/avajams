@@ -96,3 +96,6 @@ ENV/
 
 # Pickle files
 *.p
+
+*.mov
+*.mp4
