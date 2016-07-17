@@ -12,9 +12,9 @@ import os
 # import inception as ts
 from features import inception as ts
             
-def main(argv):
+def main(images):
 
-    print os.environ['PROJECT_ROOT']
+    # print os.environ['PROJECT_ROOT']
     file_path = os.path.join(os.environ['PROJECT_ROOT'],'features/output/' )
     
     """
@@ -41,15 +41,17 @@ def main(argv):
     image_match = -1
     video_match = []
 
-    if argv:
-        path = argv
-        print('Comparing to image...', path)
-        
+    if images:       
         # Perform inception classification on input image
         ts.create_graph()
-        skip, img_vec = ts.image_to_vector(path)
-        
-        image_match, video_match = similarity.nearest(fp, meta, video_score, video_meta, img_vec)
+
+        vecs = np.zeros(len(images), load_features.SOFTMAX_SIZE)
+        for i, image in enumerate(images):
+            _, img_vec = ts.image_to_vector(image)
+            vecs[i] = img_vec
+        video_vec = combine_vectors(vecs)
+
+        image_match, video_match = similarity.nearest(fp, meta, video_score, video_meta, video_vec)
         print('nearest_image_match', image_match)
         print('nearest_video_match', video_match)   
         return image_match, video_match
@@ -63,6 +65,6 @@ def main(argv):
         print('nearest_video_match', video_match)
         
     print('\n')
-        
-if __name__ == '__main__':
-    main(sys.argv[1:])
+
+if __name__ == "__main__":
+    main(['validate_images/a.jpg', 'validate_images/b.jpg'])
