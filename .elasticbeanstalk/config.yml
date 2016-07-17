@@ -1,0 +1,10 @@
+branch-defaults:
+  default:
+    environment: avajams-dev
+global:
+  application_name: avajams
+  default_ec2_keyname: deeplearn
+  default_platform: Docker 1.11.1
+  default_region: us-east-1
+  profile: null
+  sc: null
