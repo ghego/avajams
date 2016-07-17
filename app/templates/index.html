@@ -144,12 +144,25 @@
 
     <hr class="featurette-divider">
 
-    <div class="row featurette">
+    <div class="row featurette" ng-if="f.result && f.result.static_video_url">
       <div class="col-md-7">
-        <h2 class="featurette-heading">Your music video doppleganger. <span class="text-muted">See for yourself.</span></h2>
+        <h2 class="featurette-heading">Here's you. <span class="text-muted">What you're up to.</span></h2>
         <!-- <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p> -->
       </div>
       <div class="col-md-5">
+        <video width="500" height="390"  class="featurette-image img-responsive center-block" ng-src="{[f.result.static_video_url]}" type="video" controls>
+        
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette" ng-if="f.result && f.result.embed_url">
+      <div class="col-md-7 col-md-push-5">
+        <h2 class="featurette-heading">Here's your music video doppleganger. <span class="text-muted">See for yourself.</span></h2>
+        <!-- <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p> -->
+      </div>
+      <div class="col-md-5 col-md-pull-7">
         <iframe ng-if="f.result" title="YouTube video player" class="youtube-player" type="text/html" 
         ng-src="{[trustSrc(f.result.embed_url)]}"
         width="500" height="390" 
@@ -159,22 +172,9 @@
 
     <hr class="featurette-divider">
 
-    <div class="row featurette" ng-if="f.result && f.result.static_video_url">
-      <div class="col-md-7 col-md-push-5">
-      
-        <h2 class="featurette-heading">You're own music video. <span class="text-muted">It'll blow your mind.</span></h2>
-        <!-- <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p> -->
-      </div>
-      <div class="col-md-5 col-md-pull-7">
-        <video width="500" height="390"  class="featurette-image img-responsive center-block" ng-src="{[f.result.static_video_url]}" type="video" controls>
-      </div>
-    </div>
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
+    <div class="row featurette" ng-if="f.result && f.result.chopped_static_url">
       <div class="col-md-7">
-        <h2 class="featurette-heading">Chopped</h2>
+        <h2 class="featurette-heading">.. and here is your personal music video. <span class="text-muted">It will blow your mind.</span></h2>
         <!-- <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p> -->
       </div>
       <div class="col-md-5">

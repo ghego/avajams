@@ -1,7 +1,7 @@
 from moviepy.editor import VideoFileClip, concatenate_videoclips
 
 STEP_SIZE = 2
-MAX_VIDEO_LENGTH = 10
+MAX_VIDEO_LENGTH = 20
 
 
 def compile_clips(homevideo_path, musicvideo_path, out_path="output/clip.mp4"):

@@ -31,7 +31,7 @@ def upload():
     extract_images(destination_path)
 
     image_match, video_match = recommend("".join(destination_path.split(".")[:-1]) + "/20.jpg")
-    video_id = image_match[0].split("_")[-1]
+    video_id = image_match[0].split("video_")[-1]
 
   embed_url = 'https://www.youtube.com/embed/%s'%(video_id)
   
@@ -42,6 +42,11 @@ def upload():
 
 
   chopped_static_url = "static/video/chopped_video_%s.webm"%(video_id)
+  print "------------------------------------"
+  print embed_url
+  print static_video_url
+  print chopped_static_url
+  print "------------------------------------"
 
   return jsonify(msg='test', embed_url=embed_url, static_video_url=static_video_url, chopped_static_url=chopped_static_url)
 
