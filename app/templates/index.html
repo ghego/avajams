@@ -1,0 +1,203 @@
+{% extends "layout.html" %}
+
+{% block header %}
+
+<!-- default contents renderd -->
+{{ super() }} 
+
+<!-- load local javascript/css requirements -->
+
+
+{% endblock header %}
+
+
+{% block content %}
+
+
+  <div class="navbar-wrapper">
+    <div class="container">
+
+      <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">NNetwork Jams</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    </div>
+  </div>
+
+
+  <!-- Carousel
+  ================================================== -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+    </ol>
+    
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Boom Kazaam</h1>
+            <p>..Turn your life into a music video</p>
+            <p>
+              <form class="form-inline">
+                <div class="form-group">
+                  <button class="btn btn-lg btn-primary" type="file" ngf-select="uploadFiles($file, $invalidFiles)"
+                                        accept="*" ngf-max-height="1000" ngf-max-size="50MB">
+                      Upload Image / Video
+                  </button>
+                </div>
+              </form>
+              <div style="font:smaller">{[f.name]} {[errFile.name]} {[errFile.$error]} {[errFile.$errorParam]}
+                  <span class="progress" ng-show="f.progress >= 0">
+                      <div style="width:{[f.progress]}%"  
+                           ng-bind="f.progress + '%'"></div>
+                  </span>
+              </div>
+
+              <!-- Image thumbnail: <img ngf-thumbnail="file">
+              Audio preview: <audio controls ngf-src="file"></audio>
+              Video preview: <video controls ngf-src="file"></video> -->
+              
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="item">
+        <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Deep Learning</h1>
+            <p>Let the machines pick you a theme song</p>
+            <p>
+              <form class="form-inline">
+                <div class="form-group">
+                  <button class="btn btn-lg btn-primary" type="file" ngf-select="uploadFiles($file, $invalidFiles)"
+                                        accept="image/*,audio/*" ngf-max-height="1000" ngf-max-size="50MB">
+                      Upload Image / Video
+                  </button>
+                </div>
+              </form>
+              <div style="font:smaller">{[f.name]} {[errFile.name]} {[errFile.$error]} {[errFile.$errorParam]}
+                  <span class="progress" ng-show="f.progress >= 0">
+                      <div style="width:{[f.progress]}%"  
+                           ng-bind="f.progress + '%'"></div>
+                  </span>
+              </div>
+            </p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div><!-- /.carousel -->
+
+
+  <!-- Marketing messaging and featurettes
+  ================================================== -->
+  <!-- Wrap the rest of the page in another container to center all the content. -->
+
+  <div class="container marketing">
+
+
+    <!-- START THE FEATURETTES -->
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">Your music video doppleganger. <span class="text-muted">See for yourself.</span></h2>
+        <!-- <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p> -->
+      </div>
+      <div class="col-md-5">
+        <iframe ng-if="f.result" title="YouTube video player" class="youtube-player" type="text/html" 
+        ng-src="{[trustSrc(f.result.embed_url)]}"
+        width="500" height="390" 
+        frameborder="0" allowFullScreen ng-cloak></iframe>
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette" ng-if="f.result && f.result.static_video_url">
+      <div class="col-md-7 col-md-push-5">
+      
+        <h2 class="featurette-heading">You're own music video. <span class="text-muted">It'll blow your mind.</span></h2>
+        <!-- <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p> -->
+      </div>
+      <div class="col-md-5 col-md-pull-7">
+        <video width="500" height="390"  class="featurette-image img-responsive center-block" ng-src="{[f.result.static_video_url]}" type="video" controls>
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">Your music video doppleganger. <span class="text-muted">See for yourself.</span></h2>
+        <!-- <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p> -->
+      </div>
+      <div class="col-md-5">
+        <iframe ng-if="f.result" title="YouTube video player" class="youtube-player" type="text/html" 
+        ng-src="{[trustSrc(f.result.chopped_static_url)]}"
+        width="500" height="390" 
+        frameborder="0" allowFullScreen ng-cloak></iframe>
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+
+
+    <!-- /END THE FEATURETTES -->
+
+
+    <!-- FOOTER -->
+    <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+      <p>&copy; 2015 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </footer>
+
+  </div><!-- /.container -->
+
+{% endblock content %}
