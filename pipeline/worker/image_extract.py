@@ -10,7 +10,7 @@ import sys
 logger = logging.getLogger('avajams.image_extract')
 
 
-NIMAGES = 30
+NIMAGES = 20
 SCALE = 100
 
 def extract_images(video_file_name):

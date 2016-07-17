@@ -45,11 +45,11 @@ def main(images):
         # Perform inception classification on input image
         ts.create_graph()
 
-        vecs = np.zeros(len(images), load_features.SOFTMAX_SIZE)
+        vecs = np.zeros((len(images), load_features.SOFTMAX_SIZE))
         for i, image in enumerate(images):
             _, img_vec = ts.image_to_vector(image)
             vecs[i] = img_vec
-        video_vec = combine_vectors(vecs)
+        video_vec = load_features.combine_vectors(vecs)
 
         image_match, video_match = similarity.nearest(fp, meta, video_score, video_meta, video_vec)
         print('nearest_image_match', image_match)

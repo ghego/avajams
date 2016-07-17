@@ -4,6 +4,7 @@ from pipeline.worker.image_extract import *
 from werkzeug.utils import secure_filename
 from mashup.compile import *
 from train.recommend import main as recommend
+import random
 
 @app.route('/')
 def index():
@@ -29,9 +30,20 @@ def upload():
       pass
     static_video_url = "static/video/%s"%(filename)
     extract_images(destination_path)
-
-    image_match, video_match = recommend("".join(destination_path.split(".")[:-1]) + "/20.jpg")
-    video_id = image_match[0].split("video_")[-1]
+    base_image_path = "".join(destination_path.split(".")[:-1])
+    images = []
+    for i in range(1,30):
+      if os.path.exists(base_image_path + "/%s.jpg"%(i*2)):
+        images.append(base_image_path + "/%s.jpg"%(i*2))
+      else:
+        break
+    # images = [ base_image_path+ "/%s.jpg"%(i) for i in random.sample(range(1, 20), 10)]
+    image_match, video_match = recommend(images)
+    print "----matches"
+    print image_match
+    print video_match
+    # video_id = image_match[0].split("video_")[-1]
+    video_id = video_match.split("video_")[-1]
 
   embed_url = 'https://www.youtube.com/embed/%s'%(video_id)
   
