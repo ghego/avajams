@@ -6,7 +6,7 @@ import pickle
 
 FULLY_CONNECTED_VECTOR_SIZE = 2048
 SOFTMAX_VECTOR_SIZE = 1008
-INPUT_FOLDER = sys.argv[1] if len(sys.argv) == 2 else 'images/'
+INPUT_FOLDER = sys.argv[1] if len(sys.argv) >= 2 else 'images/'
 OUTPUT_FOLDER= sys.argv[2] if len(sys.argv) == 3 else 'output/'
 PROCESSING_BATCH_SIZE = 10
 WRITE_TO_DISK_EVERY_X = 100
