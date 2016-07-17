@@ -7,6 +7,7 @@ import pickle
 FULLY_CONNECTED_VECTOR_SIZE = 2048
 SOFTMAX_VECTOR_SIZE = 1008
 INPUT_FOLDER = sys.argv[1] if len(sys.argv) == 2 else 'images/'
+OUTPUT_FOLDER= sys.argv[2] if len(sys.argv) == 3 else 'output/'
 PROCESSING_BATCH_SIZE = 10
 WRITE_TO_DISK_EVERY_X = 100
 
@@ -37,9 +38,9 @@ def batch(iterable, n=1):
 
 def vectorize_files(rootfolder,
                     files,
-                    fully_connected_path='output/fully_connected.np',
-                    softmax_path='output/softmax.np',
-                    meta_path='output/meta.p'):
+                    fully_connected_path='{}/fully_connected.np'.format(OUTPUT_FOLDER),
+                    softmax_path='{}/softmax.np'.format(OUTPUT_FOLDER),
+                    meta_path='{}/meta.p'.format(OUTPUT_FOLDER)):
     """Create batches of files and run them through inception v3
     input:
         rootfolder: root of all folder and files
