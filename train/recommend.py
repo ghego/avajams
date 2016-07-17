@@ -7,14 +7,15 @@ import numpy as np
 import pickle
 import load_features
 import similarity
-
-sys.path.insert(0, '../features')
-import inception as ts
+import os
+# sys.path.insert(0, '../features')
+# import inception as ts
+from features import inception as ts
             
 def main(argv):
 
-    #print(argv)        
-    file_path = '../features/output/' 
+    print os.environ['PROJECT_ROOT']
+    file_path = os.path.join(os.environ['PROJECT_ROOT'],'features/output/' )
     
     """
     Loading meta.p and softmax.np
@@ -39,9 +40,9 @@ def main(argv):
     """
     image_match = -1
     video_match = []
-    
-    if len(sys.argv) > 1:
-        path = sys.argv[1]     
+
+    if argv:
+        path = argv
         print('Comparing to image...', path)
         
         # Perform inception classification on input image
@@ -51,7 +52,8 @@ def main(argv):
         image_match, video_match = similarity.nearest(fp, meta, video_score, video_meta, img_vec)
         print('nearest_image_match', image_match)
         print('nearest_video_match', video_match)   
-        
+        return image_match, video_match
+    
     else:
         test_idx = 900;
         print('Comparing to default test image:', meta[test_idx])

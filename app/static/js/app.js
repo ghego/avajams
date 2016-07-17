@@ -28,21 +28,27 @@ angular.module('app', ['ngRoute', 'ngFileUpload', 'ngSanitize'])
     $scope.f = file;
     $scope.errFile = errFiles && errFiles[0];
     if (file) {
+
       file.upload = Upload.upload({
         url: '/upload',
         data: {file: file}
       });
+     $('body').css('cursor', 'progress');
+
+
 
       file.upload.then(function (response) {
         $timeout(function () {
           console.log(response)
           file.result = response.data;
           $("body").animate({scrollTop: $('.marketing').offset().top}, "slow");
+          $('body').css('cursor', 'default');
         });
       }, function (response) {
         if (response.status > 0)
           console.log(response)
           $scope.errorMsg = response.status + ': ' + response.data;
+          $('body').css('cursor', 'default');
       }, function (evt) {
         file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
       });
