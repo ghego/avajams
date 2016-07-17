@@ -8,7 +8,7 @@ def get_df(filename):
         data = [i.strip() for i in data]
         data_2 = [json.loads(line) for line in data]
     dataframe = pd.DataFrame(data_2)
-    return dataframe.drop_duplicates('link')
+    return dataframe.drop_duplicates('Link')
 
 
 
@@ -27,7 +27,7 @@ def main():
     args = parser.parse_args()
 
     df = get_df(args.data_file)
-    df.link = df.link.apply(change_url)
+    df.Link = df.Link.apply(change_url)
     df.to_csv(args.save_file)
     print ('saved file')
 
