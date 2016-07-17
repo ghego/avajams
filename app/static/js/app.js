@@ -48,25 +48,6 @@ angular.module('app', ['ngRoute', 'ngFileUpload', 'ngSanitize'])
       });
     }   
   }
-  // $scope.readURL = function() {
-  //   console.log("-- change")
-  // }
-
-  // function readURL(input) {
-  //     if (input.files && input.files[0]) {
-  //         var reader = new FileReader();
-          
-  //         reader.onload = function (e) {
-  //             $('#blah').attr('src', e.target.result);
-  //         }
-          
-  //         reader.readAsDataURL(input.files[0]);
-  //     }
-  // }
   
-  // $("#item1").change(function(){
-  //   console.log("CHANGE")
-  //   readURL(this);
-  // });
 
 }])

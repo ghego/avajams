@@ -34,12 +34,13 @@ def upload():
   static_video_url = "static/video/video_SR6iYWJxHqs.mp4"
 
   matched_video_path = app.config['STATIC_VIDEO_FOLDER'] + "/video_SR6iYWJxHqs.mp4"
-  out_path = app.config['STATIC_VIDEO_FOLDER'] + "/chopped_video_SR6iYWJxHqs.mp4"
+  out_path = app.config['STATIC_VIDEO_FOLDER'] + "/chopped_video_SR6iYWJxHqs.webm"
   compile_clips(destination_path, matched_video_path, out_path=out_path)
-  # process file
-  # return the youtube embed_url and 
 
-  return jsonify(msg='test', embed_url=embed_url, static_video_url=static_video_url, chopped_static_url="static/video/chopped_video_SR6iYWJxHqs.mp4")
+
+  chopped_static_url = "static/video/chopped_video_SR6iYWJxHqs.webm"
+
+  return jsonify(msg='test', embed_url=embed_url, static_video_url=static_video_url, chopped_static_url=chopped_static_url)
 
 @app.route('/api/ping')
 def ping():

@@ -1,7 +1,7 @@
 from moviepy.editor import VideoFileClip, concatenate_videoclips
 
 STEP_SIZE = 2
-MAX_VIDEO_LENGTH = 60
+MAX_VIDEO_LENGTH = 10
 
 
 def compile_clips(homevideo_path, musicvideo_path, out_path="output/clip.mp4"):
@@ -42,7 +42,7 @@ def compile_clips(homevideo_path, musicvideo_path, out_path="output/clip.mp4"):
 
     final_clip = concatenate_videoclips(clips, method='compose').without_audio()
     final_clip.audio = audio
-    final_clip.write_videofile("output/clip.mp4", fps=24, codec='mpeg4', audio_codec='libvorbis')
+    final_clip.write_videofile(out_path, fps=24, codec='libvpx', audio_codec='libvorbis')
 
 if __name__ == "__main__":
     print "Compiling two clips..."
