@@ -5,11 +5,12 @@ import logging
 import re
 import os
 import sys
-logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+
+# logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 logger = logging.getLogger('avajams.image_extract')
 
 
-NIMAGES = 200
+NIMAGES = 30
 SCALE = 100
 
 def extract_images(video_file_name):
